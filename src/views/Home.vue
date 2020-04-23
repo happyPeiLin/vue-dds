@@ -335,27 +335,11 @@ export default {
         }
       };
     },
-    // forbid() {
-    //   var lastTouchEnd = 0;
-    //   console.log(document.documentElement + "document.documentElement")
-    //   document.documentElement.addEventListener(
-    //     "touchend",
-    //     function(event) {
-    //       var now = Date.now();
-    //       if (now - lastTouchEnd <= 300) {
-    //         event.preventDefault();
-    //       }
-    //       lastTouchEnd = now;
-    //     },
-    //     false
-    //   );
-    // },
 
     koaget() {
-      // console.log(new Date().toLocaleString('chinese',{hour12:false}))
       var self = this;
       axios
-        .post("http://localhost:3800/users/getPerson", {
+        .post("http://47.107.153.211:3800/users/getPerson", {
           type: "type999"
         })
         .then(function(response) {
@@ -377,17 +361,17 @@ export default {
       console.log(this.time);
 
       axios
-        .post("http://localhost:3800/users/addPerson", {
+        .post("http://47.107.153.211:3800/users/addPerson", {
           name: this.nickname,
           age: this.lastScore,
           type: "type999",
           time: this.time
         })
         .then(function(response) {
-          console.log(response);
+          console.log("response");
         })
         .catch(function(error) {
-          console.log(error);
+          console.log("error");
         });
       this.koaget();
       this.words = "开始游戏";
