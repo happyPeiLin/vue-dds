@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        h1 {
+            font-size: 20px;
+        }
+
+        #testDiv {
+            width: 150px;
+            height: 150px;
+            background: #abcdef;
+            position: relative;
+            margin-left: 50px;
+        }
+
+        #duiZhao {
+            width: 150px;
+            height: 150px;
+            background: greenyellow;
+            position: relative;
+            margin-left: 50px;
+            left: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>10.div每点击一次 向右移动200px(带DOM动画过渡)</h1>
+    <div id="testDiv">点击我会移动</div>
+    <div id="duiZhao">我是移动后200px位置的参照</div>
+    <script>
+        var testDiv = document.getElementById('testDiv');
+        testDiv.addEventListener('click', divMove);
+
+        function divMove() {
+            var frameCount = 50;
+            var n = 200 / frameCount; //1s50帧
+            var count = 0;
+            var setIntervalId = setInterval(divSmallMove, 1000 / frameCount); //1s50帧
+            divSmallMove();
+
+            function divSmallMove() {
+                testDiv.style.left = parseInt(getStyle(testDiv, 'left')) + n + 'px';
+                count++;
+                if (count == frameCount) { //移动了50帧，说明位置到了，停下来
+                    clearInterval(setIntervalId);
+                }
+            }
+        }
+
+        function getStyle(obj, attr) {
+            if (obj.currentStyle) { //IE
+                return obj.currentStyle[attr];
+            } else {
+                return getComputedStyle(obj, "伪类")[attr]; //Firefox
+            }
+        }
+    </script>
+</body>
+
+</html>
